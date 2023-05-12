@@ -20,10 +20,12 @@ public class Main{
         tree1.insert(8);
         tree1.insert(10);
 
-        tree.swapRoot();
-        System.out.println(tree.isBinarySearchTree());
+        // tree.swapRoot();
+        // System.out.println(tree.isBinarySearchTree());
 
-        var list = tree.nodeAt(0);
-        System.out.println(list);
+        // var list = tree.nodeAt(0);
+        // System.out.println(list);
+
+        tree.traverseLevelOrder();
     }
 }

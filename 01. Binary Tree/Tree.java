@@ -78,6 +78,15 @@ public class Tree {
         traversePostOrder(root);
     }
 
+    public void traverseLevelOrder(){
+        for(int i = 0; i <= height(root); i++){
+            var list = nodeAt(i);
+            for(var item : list){
+                System.out.println(item);
+            }
+        }
+    }
+
     public int height(){
         return height(root);
     }
