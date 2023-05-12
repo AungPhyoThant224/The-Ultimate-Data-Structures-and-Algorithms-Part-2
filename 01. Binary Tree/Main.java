@@ -22,5 +22,8 @@ public class Main{
 
         tree.swapRoot();
         System.out.println(tree.isBinarySearchTree());
+
+        var list = tree.nodeAt(0);
+        System.out.println(list);
     }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Tree {
     private class Node{
         private int value;
@@ -116,6 +118,26 @@ public class Tree {
         var temp = root.leftChild;
         root.leftChild = root.rightChild;
         root.rightChild = temp;
+    }
+
+    public ArrayList<Integer> nodeAt(int k){
+        ArrayList<Integer> list = new ArrayList<>();
+        nodeAt(root, k, list);
+        return list;
+    }
+
+    private void nodeAt(Node root, int k, ArrayList<Integer> list){
+        if(root == null){
+            return;
+        }
+
+        if(k == 0){
+            list.add(root.value);
+            return;
+        }
+
+        nodeAt(root.leftChild, k - 1, list);    
+        nodeAt(root.rightChild, k - 1, list);
     }
 
     private boolean isBinarySearchTree(Node root, int min, int max){
