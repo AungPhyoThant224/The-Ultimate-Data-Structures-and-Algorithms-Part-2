@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Tree {
     private class Node{
@@ -24,6 +25,7 @@ public class Tree {
 
         if(root == null){
             root = node;
+            count++;
             return;
         }
 
@@ -33,6 +35,7 @@ public class Tree {
             if(value < current.value){
                 if(current.leftChild == null){
                     current.leftChild = node;
+                    count++;
                     break;
                 }
                 current = current.leftChild;
@@ -40,6 +43,7 @@ public class Tree {
             else if(value > current.value){
                 if(current.rightChild == null){
                     current.rightChild = node;
+                    count++;
                     break;
                 }
                 current = current.rightChild;
@@ -107,6 +111,21 @@ public class Tree {
         return last.value;
     }
 
+    public int maxBinarySearch(){
+        if(root == null){
+            throw new IllegalStateException();
+        }
+
+        var current = root;
+        var last = current;
+        while(current != null){
+            last = current;
+            current = current.rightChild;
+        }
+
+        return last.value;
+    }
+
     public int min(){
         return min(root);
     }
@@ -133,6 +152,127 @@ public class Tree {
         ArrayList<Integer> list = new ArrayList<>();
         nodeAt(root, k, list);
         return list;
+    }
+
+    public int size(){
+        return count;
+    }
+
+    public void countLeaves(){
+        ArrayList<Integer> list = new ArrayList<>();
+        countLeaves(root, list);
+        System.out.println(list.size());
+    }
+
+    public boolean contains(int value){
+        return contains(root, value, false);
+    }
+
+    public boolean areSiblings(int first, int second){
+        
+        return areSiblings(root, first, second);
+    }
+
+    public void getAncestors(int node){
+        ArrayList<Integer> list = new ArrayList<>();
+        getAncestors(root, node, list);
+        System.out.println(list);
+    }
+
+    private void getAncestors(Node root, int node, ArrayList<Integer> list){
+        if(root == null){
+            return;
+        }
+
+        if(root.value == node){
+            return;
+        }
+
+        if(isLeaf(root) && node != root.value){
+            throw new IllegalStateException();
+        }
+
+        if(node < root.value){
+            list.add(root.value);
+            getAncestors(root.leftChild, node, list);
+        }
+        else{
+            list.add(root.value);
+            getAncestors(root.rightChild, node, list);
+        }
+    }
+
+    private boolean areSiblings(Node root, int first, int second){
+        if(root == null){
+            return false;
+        }
+
+        if(checkSiblings(root, first, second)){
+            return true;
+        }
+
+        if(isLeaf(root)){
+            return false;
+        }
+
+        if(first < root.value && second < root.value){
+            return areSiblings(root.leftChild, first, second);
+        }
+        else if(first > root.value && second > root.value){
+            return areSiblings(root.rightChild, first, second);
+        }
+        else{
+            return false;
+        }
+    }
+
+    private boolean checkSiblings(Node root, int first, int second){
+        int left = root.leftChild.value;
+        int right = root.rightChild.value;
+        if((left == first && right == second) || (left == second && right == first)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean contains(Node root, int value, boolean con){
+        if(root == null){
+            return false;
+        }
+
+        if(root.value == value){
+            return true;
+        }
+
+        if(isLeaf(root)){
+            return false;
+        }
+
+        if(value < root.value){
+            return contains(root.leftChild, value, con);
+        }
+        else if(value > root.value){
+            return contains(root.rightChild, value, con);
+        }
+        else{
+            return true;
+        }
+    }
+
+    private void countLeaves(Node root, ArrayList<Integer> list){
+        
+        if(root == null){
+            return;
+        }
+
+        if(isLeaf(root)){
+            list.add(root.value);
+            return;
+        }
+
+        countLeaves(root.leftChild, list);
+        countLeaves(root.rightChild, list);
+
     }
 
     private void nodeAt(Node root, int k, ArrayList<Integer> list){
