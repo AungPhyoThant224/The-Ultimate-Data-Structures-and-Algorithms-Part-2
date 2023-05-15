@@ -30,13 +30,23 @@ public class AVLTree {
 
         root.height = Math.max(height(root.leftChild), height(root.rightChild)) +1;
 
+        balance(root);
+        return root;
+    }
+
+    private void balance(AVLNode root){
         if(leftHeavy(root)){
-            System.out.print("Left Heavy at " + root.value);
+            if(balanceFactor(root.leftChild) < 0){
+                System.out.println("Left rotate " + (root.leftChild.value));
+            }
+            System.out.println("Right rotate " + (root.value));
         }
         else if(rightHeavy(root)){
-            System.out.println("Right Heavy at " + root.value);
-        }
-        return root;
+            if(balanceFactor(root.rightChild) > 0){
+                System.out.println("Right rotate " + (root.rightChild.value));
+            }
+            System.out.println("Left rotate " + (root.value));
+        } 
     }
 
     private int height(AVLNode root){
