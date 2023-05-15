@@ -16,6 +16,23 @@ public class AVLTree {
         root = insert(root, value);
     }
 
+    public boolean isBalance(){
+        return isBalance(root);
+    }
+
+    public boolean isPerfect(){
+        var left = root.leftChild;
+        var right = root.rightChild;
+        
+        var leftSize = size(left);
+        var rightSize = size(right);
+
+        if(left.height == right.height && leftSize == rightSize){
+            return true;
+        }
+        return false;
+    }
+
     private AVLNode insert(AVLNode root, int value){
         if(root == null){
             return new AVLNode(value);
@@ -96,4 +113,32 @@ public class AVLTree {
         return (root == null) ? 0 : height(node.leftChild) - height(node.rightChild);
     }
 
+    private boolean isBalance(AVLNode root){
+        if(root == null){
+            return true;
+        }
+
+        if(balanceFactor(root) < -1 || balanceFactor(root) > 1){
+            return false;
+        }
+
+        var left = isBalance(root.leftChild);
+        var right = isBalance(root.rightChild);
+
+        if(left == false || right == false){
+            return false;
+        }
+        return true;
+    }
+
+    private int size(AVLNode node){
+        if(node == null){
+            return 0;
+        }
+
+        var left = size(node.leftChild);
+        var right = size(node.rightChild);
+
+        return left + right;
+    }
 }
