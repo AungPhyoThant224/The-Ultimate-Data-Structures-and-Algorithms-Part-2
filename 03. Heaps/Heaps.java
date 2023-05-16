@@ -36,30 +36,84 @@ public class Heaps {
         }
     }
 
+    // ---------------Mosh Solution--------------
     private void bubbleDown(){
         int index = 0;
-        while(index < size){
-            if(items[index] < items[leftChild(index)] || items[index] < items[rightChild(index)]){
-                if(items[leftChild(index)] > items[rightChild(index)]){
-                    swap(index, leftChild(index));
-                    index = leftChild(index);
-                }
-                else if(items[rightChild(index)] > items[leftChild(index)]){
-                    swap(index, rightChild(index));
-                    index = rightChild(index);
-                }
-            }
-            else{
-                break;
-            }
+        while(index <= size && !isValidParent(index)){
+            var largerChildIndex = largerChildIndex(index);
+            swap(index, largerChildIndex);
+            index = largerChildIndex;
         }
     }
 
+    //--------------My Solution---------------
+    // private void bubbleDown(){
+    //     int index = 0;
+    //     while(index < size){
+    //         if(items[index] < items[leftChildIndex(index)] || items[index] < items[rightChild(index)]){
+    //             if(items[leftChildIndex(index)] > items[rightChildIndex(index)]){
+    //                 swap(index, leftChildIndex(index));
+    //                 index = leftChildIndex(index);
+    //             }
+    //             else if(items[rightChildIndex(index)] > items[leftChildIndex(index)]){
+    //                 swap(index, rightChildIndex(index));
+    //                 index = rightChildIndex(index);
+    //             }
+    //         }
+    //         else{
+    //             break;
+    //         }
+    //     }
+    // }
+
+    private boolean hasLeftChild(int index){
+        return leftChildIndex(index) <= size;
+    }
+
+    private boolean hasRightChild(int index){
+        return rightChildIndex(index) <= size;
+    }
+
+    private int largerChildIndex(int index){
+        if(!hasLeftChild(index)){
+            return index;
+        }
+
+        if(!hasRightChild(index)){
+            return leftChildIndex(index);
+        }
+
+        return leftChild(index) > rightChild(index) ?
+            leftChildIndex(index) : rightChildIndex(index);
+    }
+
+    private boolean isValidParent(int index){
+        if(!hasLeftChild(index)){
+            return true;
+        }
+
+        var isValid = items[index] >= leftChild(index);
+
+        if(hasRightChild(index)){
+            isValid = isValid & items[index] >= rightChild(index);
+        }
+        
+        return isValid;
+    }
+
     private int leftChild(int index){
-        return (index * 2) + 1;
+        return items[leftChildIndex(index)];
     }
 
     private int rightChild(int index){
+        return items[rightChildIndex(index)];
+    }
+
+    private int leftChildIndex(int index){
+        return (index * 2) + 1;
+    }
+
+    private int rightChildIndex(int index){
         return (index * 2) + 2;
     }
 
