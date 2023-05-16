@@ -20,5 +20,10 @@ public class Main{
         //     numbers[i] = heaps.remove();
         // }
         // System.out.println(Arrays.toString(numbers));
+
+        // ---------------Heapify---------------
+        int[] numbers = {5, 3, 8, 4, 1, 2};
+        MaxHeaps.heapify(numbers);
+        System.out.println(Arrays.toString(numbers));
     }
 }
