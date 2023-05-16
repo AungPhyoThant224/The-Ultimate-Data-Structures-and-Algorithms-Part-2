@@ -33,5 +33,47 @@ public class TriesWithHash {
             }
             current = current.getChild(ch);
         }
+        current.isEndOfWord = true;
+    }
+
+    // ---------------Mosh Solution------------
+    public boolean contains(String word){
+        if(isEmpty()){
+            throw new IllegalStateException();
+        }
+        var current = root;
+        for(char ch: word.toCharArray()){
+            if(!current.hasChild(ch)){
+                return false;
+            }
+            current = current.getChild(ch);
+        }
+        return current.isEndOfWord;
+    }
+
+    // ------------My Solution--------
+    // public boolean contains(String word){
+    //     var current = root;
+    //     if(isEmpty()){
+    //         throw new IllegalStateException();
+    //     }
+    //     char[] charArr = word.toCharArray();
+    //     for(int i = 0; i < charArr.length; i++){
+    //         if(!current.hasChild(charArr[i])){
+    //             return false;
+    //         }
+
+    //         current = current.getChild(charArr[i]);
+
+    //         if(i == charArr.length - 1 && current.isEndOfWord == false){
+    //             return false;
+    //         }
+
+    //     }
+    //     return true;
+    // }
+
+    public boolean isEmpty(){
+        return root.children == null;
     }
 }
