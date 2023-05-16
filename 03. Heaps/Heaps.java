@@ -30,6 +30,14 @@ public class Heaps {
         return size == 0;
     }
 
+    public int max(){
+        if(isEmpty()){
+            throw new IllegalStateException();
+        }
+
+        return items[0];
+    }
+
     private void bubbleUp(){
         int index = size - 1;
         while(index > 0 && items[index] >  items[parent(index)]){

@@ -23,8 +23,12 @@ public class Main{
 
         // ---------------Heapify---------------
         // int[] numbers = {5, 3, 8, 4, 1, 2};
-        int[] numbers = {5, 6, 7, 9, 11, 13};
-        MaxHeaps.heapify(numbers);
-        System.out.println(Arrays.toString(numbers));
+        // int[] numbers = {5, 6, 7, 9, 11, 13};
+        // MaxHeaps.heapify(numbers);
+        // System.out.println(Arrays.toString(numbers));
+
+        // --------------Largest Item at K-------------
+        int[] numbers = {5, 3, 8, 4, 1, 2};
+        System.out.println(MaxHeaps.getKthLargest(numbers, 3));
     }
 }

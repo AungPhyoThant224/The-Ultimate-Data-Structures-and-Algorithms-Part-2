@@ -6,6 +6,25 @@ public class MaxHeaps {
         }
     }
 
+    public static int getKthLargest(int[] arr, int K){
+        Heaps heaps = new Heaps();
+
+        if(K >= arr.length){
+            return -1;
+        }
+
+        for(var number : arr){
+            heaps.insert(number);
+        }
+
+        for(int i = 0; i < K - 1; i++){
+            heaps.remove();
+        }
+
+        return heaps.max();
+        
+    }
+
     private static void heapify(int[] arr, int index){
         var largerIndex = index;
 
