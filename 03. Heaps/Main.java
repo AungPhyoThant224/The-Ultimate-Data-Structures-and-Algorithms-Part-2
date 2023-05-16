@@ -22,7 +22,8 @@ public class Main{
         // System.out.println(Arrays.toString(numbers));
 
         // ---------------Heapify---------------
-        int[] numbers = {5, 3, 8, 4, 1, 2};
+        // int[] numbers = {5, 3, 8, 4, 1, 2};
+        int[] numbers = {5, 6, 7, 9, 11, 13};
         MaxHeaps.heapify(numbers);
         System.out.println(Arrays.toString(numbers));
     }
