@@ -28,7 +28,21 @@ public class Main{
         // System.out.println(Arrays.toString(numbers));
 
         // --------------Largest Item at K-------------
-        int[] numbers = {5, 3, 8, 4, 1, 2};
-        System.out.println(MaxHeaps.getKthLargest(numbers, 3));
+        // int[] numbers = {5, 3, 8, 4, 1, 2};
+        // System.out.println(MaxHeaps.getKthLargest(numbers, 3));
+
+        // ------------Exercises-----------------------
+        // int[] numbers = {1, 4, 5, 3, 1, 2};
+        // System.out.println(MaxHeaps.isMaxHeap(numbers));
+
+        MinHeaps heaps = new MinHeaps();
+        heaps.add("5", 5);
+        heaps.add("3", 3);
+        heaps.add("8", 8);
+        heaps.add("4", 4);
+        heaps.add("1", 1);
+        heaps.add("2", 2);
+        heaps.remove();
+        heaps.add("8", 8);
     }
 }
