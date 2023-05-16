@@ -11,14 +11,14 @@ public class Main{
         // heaps.remove();
 
         // -----------Heaps Sort----------
-        int[] numbers = {5,3,2,10,1,4};
-        Heaps heaps = new Heaps();
-        for(var number : numbers){
-            heaps.insert(number);
-        }
-        for(int i = 0; i < numbers.length; i++){
-            numbers[i] = heaps.remove();
-        }
-        System.out.println(Arrays.toString(numbers));
+        // int[] numbers = {5,3,2,10,1,4};
+        // Heaps heaps = new Heaps();
+        // for(var number : numbers){
+        //     heaps.insert(number);
+        // }
+        // for(int i = 0; i < numbers.length; i++){
+        //     numbers[i] = heaps.remove();
+        // }
+        // System.out.println(Arrays.toString(numbers));
     }
 }
