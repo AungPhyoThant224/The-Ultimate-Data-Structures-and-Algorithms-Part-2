@@ -10,14 +10,16 @@ public class Heaps {
         bubbleUp();
     }
 
-    public void remove(){
+    public int remove(){
         if(isEmpty()){
             throw new IllegalStateException();
         }
+        var removeVal = items[0];
         items[0] = items[size -1];
         items[size-1] = 0; 
         size--;
         bubbleDown();
+        return removeVal;
     }
 
     public boolean isFull(){
@@ -97,7 +99,7 @@ public class Heaps {
         if(hasRightChild(index)){
             isValid = isValid & items[index] >= rightChild(index);
         }
-        
+
         return isValid;
     }
 
