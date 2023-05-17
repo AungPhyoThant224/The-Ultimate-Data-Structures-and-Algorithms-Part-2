@@ -38,6 +38,7 @@ public class TriesWithHash {
     }
 
     private Node root = new Node(' ');
+    private int count;
 
     public void insert(String word){
         var current = root;
@@ -48,6 +49,7 @@ public class TriesWithHash {
             current = current.getChild(ch);
         }
         current.isEndOfWord = true;
+        count++;
     }
 
     // ---------------Mosh Solution------------
@@ -109,6 +111,62 @@ public class TriesWithHash {
         return words;
     }
 
+    public boolean containsRecursive(String word){
+        if(word == null){
+            return false;
+        }
+        return containsRecursive(root, word, 0);
+    }
+
+    public int countWords(){
+        return count;
+    }
+
+    public String longestCommonPrefix(String[] words){
+        if(words == null){
+            throw new IllegalStateException();
+        }
+
+        if(words.length == 1){
+            return words[0];
+        }
+
+        String shortestWord = words[0];
+        for(int i = 0; i < words.length; i++){
+            if(shortestWord.length() > words[i].length()){
+                shortestWord = words[i];
+            }
+        }
+
+        String commonPrefix = "";
+        char[] shortestWordArr = shortestWord.toCharArray();
+        for(int i = 0; i < shortestWordArr.length; i++){
+            for(int j= 0; j < words.length; j++){
+                char[] wordArr = words[j].toCharArray();
+                if(shortestWordArr[i] != wordArr[i]){
+                    return commonPrefix;
+                }
+            }
+            commonPrefix += shortestWordArr[i];
+        }
+
+        return commonPrefix;
+
+    }
+
+    private boolean containsRecursive(Node root, String word, int index){
+        if(index == word.length()){
+            return root.isEndOfWord;
+        }
+        var ch = word.charAt(index);
+        var child = root.getChild(ch);
+        if(child == null){
+            return false;
+        }
+        var result = containsRecursive(child, word, index+1);
+        return result == false ? false : true;
+    }
+
     private void findWords(Node root, String prefix, List<String> words){
         if(root == null){
             return;
@@ -161,6 +219,7 @@ public class TriesWithHash {
         remove(child, word, index+1);
         if(!child.hasChildren() && !child.isEndOfWord){
             child.remove(ch);
+            count--;
         }
     }
 }

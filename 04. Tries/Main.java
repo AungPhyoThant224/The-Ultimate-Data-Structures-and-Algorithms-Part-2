@@ -10,9 +10,16 @@ public class Main{
         tries.insert("car");
         tries.insert("careful");
         tries.insert("egg");
-        System.out.println(tries.findWords("c").toString());
-        // tries.remove("care");
+        // System.out.println(tries.findWords("c").toString());
+        // tries.remove("agg");
         // System.out.println(tries.contains("care"));
         // System.out.println(tries.contains("car"));
+
+        // --------------Exercises-----------------
+        // System.out.println(tries.containsRecursive(null));
+        // System.out.println(tries.countWords());
+        String[] arr = {"care", "dog", "careful"};
+        var commonPrefix = tries.longestCommonPrefix(arr);
+        System.out.println(commonPrefix);
     }
 }
