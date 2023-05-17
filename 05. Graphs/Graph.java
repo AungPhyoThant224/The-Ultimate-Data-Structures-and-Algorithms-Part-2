@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 public class Graph {
     private class Node{
@@ -82,6 +83,35 @@ public class Graph {
         traverseDepthFirst(node, new HashSet<>());
     }
 
+    public void traverseDepthFirstIterative(String label){
+        var node = nodes.get(label);
+        if(node == null){
+            return;
+        }
+
+        Set<Node> visited = new HashSet<>();
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+        while(!stack.isEmpty()){
+            var current = stack.pop();
+
+            if(visited.contains(current)){
+                continue;
+            }
+
+            System.out.println(current);
+            visited.add(current);
+
+            for(var neighbour : adjacencyList.get(current)){
+                if(!visited.contains(neighbour)){
+                    stack.push(neighbour);
+                }
+            }
+        }
+        
+    }
+
     private void traverseDepthFirst(Node root, Set<Node> visited){
         System.out.println(root);
         visited.add(root);
@@ -92,4 +122,5 @@ public class Graph {
             }
         }
     }
+
 }
