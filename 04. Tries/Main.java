@@ -6,9 +6,13 @@ public class Main{
 
         TriesWithHash tries = new TriesWithHash();
         tries.insert("care");
+        tries.insert("card");
         tries.insert("car");
-        tries.remove("care");
-        System.out.println(tries.contains("care"));
-        System.out.println(tries.contains("car"));
+        tries.insert("careful");
+        tries.insert("egg");
+        System.out.println(tries.findWords("c").toString());
+        // tries.remove("care");
+        // System.out.println(tries.contains("care"));
+        // System.out.println(tries.contains("car"));
     }
 }
