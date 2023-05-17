@@ -11,6 +11,7 @@ public class Main{
         graph.addEdges("A", "C");
         // graph.removeNode("A");
         // graph.print();
-        graph.traverseDepthFirstIterative("C");
+        // graph.traverseDepthFirstIterative("A");
+        graph.breadthFirst("A");
     }
 }
