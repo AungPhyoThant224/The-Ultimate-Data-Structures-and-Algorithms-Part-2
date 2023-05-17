@@ -5,8 +5,10 @@ public class Main{
         // tries.insert("cat");
 
         TriesWithHash tries = new TriesWithHash();
-        tries.insert("can");
-        tries.insert("cat");
-        System.out.println(tries.contains("can"));
+        tries.insert("care");
+        tries.insert("car");
+        tries.remove("care");
+        System.out.println(tries.contains("care"));
+        System.out.println(tries.contains("car"));
     }
 }

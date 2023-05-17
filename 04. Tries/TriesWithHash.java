@@ -21,6 +21,18 @@ public class TriesWithHash {
         public Node getChild(char ch){
             return children.get(ch);
         }
+
+        public Node[] getChildren(){
+            return children.values().toArray(new Node[0]);
+        }
+
+        public boolean hasChildren(){
+            return !children.isEmpty();
+        }
+
+        public void remove(char ch){
+            children.remove(ch);
+        }
     }
 
     private Node root = new Node(' ');
@@ -73,7 +85,44 @@ public class TriesWithHash {
     //     return true;
     // }
 
+    public void remove(String word){
+        if(word == null){
+            throw new IllegalArgumentException();
+        }
+        remove(root, word, 0);
+    }
+
+    public void traverse(){
+        traverse(root);
+    }
+
     public boolean isEmpty(){
         return root.children == null;
+    }
+
+    private void traverse(Node root){
+        
+        for(var child: root.getChildren()){
+            traverse(child);
+        }
+        System.out.println(root.value);
+    }
+
+    private void remove(Node root, String word, int index){
+        if(index == word.length()){
+            root.isEndOfWord = false;
+            return;
+        }
+
+        var ch = word.charAt(index);
+        var child = root.getChild(ch);
+        if(child == null){
+            return;
+        }
+
+        remove(child, word, index+1);
+        if(!child.hasChildren() && !child.isEndOfWord){
+            child.remove(ch);
+        }
     }
 }
