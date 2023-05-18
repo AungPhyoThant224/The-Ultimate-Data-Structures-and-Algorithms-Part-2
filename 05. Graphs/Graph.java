@@ -143,6 +143,41 @@ public class Graph {
         }
     }
 
+    public List<String> topologicalSort(){
+        Stack<Node> stack = new Stack<>();
+        Set<Node> visited = new HashSet<>();
+        for(var node : nodes.values()){
+            topologicalSort(node, stack, visited);
+        }
+
+        List<String> topoList = new ArrayList<>();
+        while(!stack.isEmpty()){
+            topoList.add(stack.pop().label);
+        }
+
+        return topoList;
+    }
+
+    public void getNode(){
+        System.out.println(nodes.values());
+    }
+
+    private void topologicalSort(Node node, Stack<Node> stack, Set<Node> visited){
+        if(visited.contains(node)){
+            return;
+        }
+
+        visited.add(node);
+
+        for(var neighbour: adjacencyList.get(node)){
+            topologicalSort(neighbour, stack, visited);
+        }
+
+        stack.push(node);
+        System.out.println("visited " + visited);
+        System.out.println("stack " + stack);
+    }
+
     private void traverseDepthFirst(Node root, Set<Node> visited){
         System.out.println(root);
         visited.add(root);
