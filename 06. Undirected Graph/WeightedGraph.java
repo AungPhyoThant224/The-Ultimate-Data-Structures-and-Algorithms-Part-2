@@ -90,9 +90,7 @@ public class WeightedGraph {
         for (var node: nodes.values()){
             distance.put(node, Integer.MAX_VALUE);
         }
-        System.out.println(distance);
         distance.replace(fromNode, 0);
-        System.out.println(distance);
 
         Set<Node> visited = new HashSet<>();
 
@@ -132,9 +130,7 @@ public class WeightedGraph {
         for (var node: nodes.values()){
             distance.put(node, Integer.MAX_VALUE);
         }
-        System.out.println(distance);
         distance.replace(fromNode, 0);
-        System.out.println(distance);
 
         Map<Node, Node> previousNode = new HashMap<>();
         Set<Node> visited = new HashSet<>();
@@ -180,5 +176,33 @@ public class WeightedGraph {
         }
 
         return path;
+    }
+
+    public boolean hasCycle(){
+        Set<Node> visited = new HashSet<>();
+
+        for(var node: nodes.values()){
+            if(visited.contains(node) && hasCycle(node, null, visited)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean hasCycle(Node node, Node parent, Set<Node> visited){
+        
+        visited.add(node);
+        for(var edge: node.getEdges()){
+            if(edge.to == parent){
+                continue;
+            }
+
+            if(visited.contains(edge.to) || hasCycle(edge.to, parent, visited)){
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

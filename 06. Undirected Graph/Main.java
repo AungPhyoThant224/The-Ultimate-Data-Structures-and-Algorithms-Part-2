@@ -8,7 +8,8 @@ public class Main{
         graph.addEdge("A", "C", 3);
         graph.addEdge("B", "C", 1);
         // graph.print();
-        System.out.println(graph.getShortestDistance("A", "C"));
-        System.out.println(graph.getShortestPath("A", "C"));
+        // System.out.println(graph.getShortestDistance("A", "C"));
+        // System.out.println(graph.getShortestPath("A", "C"));
+        System.out.println(graph.hasCycle());
     }
 }
