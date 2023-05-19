@@ -1,7 +1,11 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 public class WeightedGraph {
     private class Node{
@@ -66,5 +70,53 @@ public class WeightedGraph {
                 System.out.println(node + " is connected to " + edges);
             }
         }
+    }
+
+    private class NodeEntry{
+        private Node node;
+        private int priority;
+
+        public NodeEntry(Node node, int priority){
+            this.node = node;
+            this.priority = priority;
+        }
+    }
+
+    public int getShortestDistance(String from, String to){
+        var fromNode = nodes.get(from);
+
+        Map<Node, Integer> distance = new HashMap<>();
+        for (var node: nodes.values()){
+            distance.put(node, Integer.MAX_VALUE);
+        }
+        System.out.println(distance);
+        distance.replace(fromNode, 0);
+        System.out.println(distance);
+
+        Set<Node> visited = new HashSet<>();
+
+        PriorityQueue<NodeEntry> queue = new PriorityQueue<>(
+            Comparator.comparingInt(ne -> ne.priority)
+        );
+        queue.add(new NodeEntry(fromNode, 0));
+
+        while(!queue.isEmpty()){
+            var current = queue.remove().node;
+            visited.add(current);
+
+            for(var edge: current.getEdges()){
+                if(visited.contains(edge)){
+                    continue;
+                }
+
+                var newDistance = distance.get(current) + edge.weight;
+                if(newDistance < distance.get(edge.to)){
+                    distance.replace(edge.to, newDistance);
+                    queue.add(new NodeEntry(edge.to, newDistance));
+                }
+            }
+        }
+
+        return distance.get(nodes.get(to));
     }
 }

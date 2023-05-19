@@ -5,7 +5,9 @@ public class Main{
         graph.addNode("B");
         graph.addNode("C");
         graph.addEdge("A", "B", 3);
-        graph.addEdge("A", "C", 2);
-        graph.print();
+        graph.addEdge("A", "C", 5);
+        graph.addEdge("B", "C", 1);
+        // graph.print();
+        System.out.println(graph.getShortestDistance("A", "C"));
     }
 }
